@@ -4,8 +4,6 @@ import { productManager } from "../index.js";
 const productsRouter = Router();
 
 productsRouter.get('/', async (req, res) => {
-    console.log("Entro por acáaaaa");
-
     try {
         const { limit } = req.query;
         const products = await productManager.getProducts()
@@ -27,6 +25,10 @@ productsRouter.get('/:pid', async (req, res) => {
     try {
         const { pid } = req.params;
         const products = await productManager.getProductsById(pid)
+
+        if(!products)
+            return res.send("Producto no encontrado");
+
         res.json(products)
     } catch (error) {
         console.log(error);
