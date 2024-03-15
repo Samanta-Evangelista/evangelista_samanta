@@ -31,16 +31,15 @@ export class ProductManager {
     getProducts = async () => {
         const response = await fs.readFile(this.path, 'utf-8');
         const responseJSON = JSON.parse(response)
-
         return responseJSON;
 
     }
 
     //Obtener un producto especifico.
     getProductsById = async (id) => {
-        const response = this.getProducts();
+        const products = await this.getProducts();
 
-        const product = response.find(product => product.id === id)
+        const product = products.find(product => product.id === id)
 
         if (product) {
             return product
@@ -51,7 +50,7 @@ export class ProductManager {
 
     //actualizar un producto especifico
     updateProduct = async (id, { ...data }) => {
-        const response = this.getProducts()
+        const response = await this.getProducts()
         const index = response.findIndex(product => product.id === id)
 
         if (index !== -1) {
@@ -65,7 +64,7 @@ export class ProductManager {
 
     //eliminar producto especifico. 
     deleteProducts = async (id) => {
-        const products = this.getProducts()
+        const products = await this.getProducts()
         const index = products.findIndex(product => product.id === id)
 
         if (index !== -1) {
