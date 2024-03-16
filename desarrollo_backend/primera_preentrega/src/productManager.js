@@ -1,4 +1,3 @@
-import { AsyncLocalStorage } from 'async_hooks';
 import { promises as fs } from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -9,8 +8,6 @@ export class ProductManager {
         this.products = []
     }
 
-    
-    //agrgar producto
     addProducts = async ({ title, description, price, thumbnail, code, stock, status, category }) => {
 
         const id = uuidv4()
@@ -70,7 +67,7 @@ export class ProductManager {
         if (index !== -1) {
             products.splice(index, 1)
             await fs.writeFile(this.path, JSON.stringify(products))
-        } else{
+        } else {
             console.log('Producto no encotrado');
         }
 
