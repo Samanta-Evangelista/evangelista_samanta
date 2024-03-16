@@ -1,1 +1,37 @@
-[{"id":"d15018b2-4b45-4db8-8e53-0767b71c8e62","title":"Gaseosa","description":"descripción gaseosa","price":100,"thumbnail":"","code":"0001","stock":200,"status":"","category":"Bebida"},{"id":"5988cc82-b2db-474b-a8fc-addb3e4391c4","title":"Gaseosa2","description":"descripción gaseosa","price":100,"thumbnail":"","code":"0001","stock":200,"status":"","category":"Bebida"},{"id":"0218732a-11bd-451d-a7fb-aed1cb5d2001","title":"Gaseosa3","description":"descripción gaseosa","price":100,"thumbnail":"","code":"0001","stock":200,"status":"","category":"Bebida"}]
+[
+    {
+    "id":"d15018b2-4b45-4db8-8e53-0767b71c8e62",
+    "title":"Gaseosa",
+    "description":"descripción gaseosa",
+    "price":100,
+    "thumbnail":"",
+    "code":"0001",
+    "stock":200,
+    "status":"",
+    "category":"Bebida"
+    },
+    
+    {
+    "id":"5988cc82-b2db-474b-a8fc-addb3e4391c4",
+    "title":"Gaseosa2",
+    "description":"descripción gaseosa",
+    "price":100,
+    "thumbnail":"",
+    "code":"0001",
+    "stock":200,
+    "status":"",
+    "category":"Bebida"
+    },
+    
+    {
+    "id":"0218732a-11bd-451d-a7fb-aed1cb5d2001",
+    "title":"Gaseosa3",
+    "description":"descripción gaseosa",
+    "price":100,
+    "thumbnail":"",
+    "code":"0001",
+    "stock":200,
+    "status":"",
+    "category":"Bebida"
+    }
+]
