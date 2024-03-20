@@ -13,8 +13,8 @@ export const productManager = new ProductManager;
 export const cartManager = new CartManager;
 
 app.use(express.json())
-app.use('/api/products', productsRouter)
-app.use('/api/carts', cartsRouter)
+app.use('/api/products', productsRouter) //http://localhost:8080/api/products
+app.use('/api/carts', cartsRouter)       //http://localhost:8080/api/carts
 
 app.listen(PORT, (req, res) => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
