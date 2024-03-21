@@ -43,7 +43,7 @@ productsRouter.post('/', async (req, res) => {
         res.json(response)
     } catch (error) {
         console.log(error);
-        res.send('ERROR AL INTENTAR AGREGAR PRODUCTO')
+        res.send('ERROR AL INTENTAR AGREGAR PRODUCTO: ' + error)
     }
 })
 
