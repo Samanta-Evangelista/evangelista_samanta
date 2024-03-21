@@ -17,6 +17,10 @@ export class ProductManager {
     status,
     category,
   }) => {
+    if (!title || !description || !price || !code || !stock || !category) {
+      throw new Error("Todos los campos son obligatorios");
+    }
+
     const id = uuidv4();
 
     let newProduct = {
@@ -60,11 +64,12 @@ export class ProductManager {
   };
 
   //actualizar un producto especifico
-  updateProduct = async (id, { ...data }) => {
+  updateProduct = async (pid, { ...data }) => {
     const response = await this.getProducts();
-    const index = response.findIndex((product) => product.id == id);
+    const index = response.findIndex((product) => product.id == pid);
 
     if (index != -1) {
+      
       const updatedProduct = { ...response[index], ...data };
       response[index] = updatedProduct;
       await fs.writeFile(this.path, JSON.stringify(response));
@@ -75,15 +80,18 @@ export class ProductManager {
   };
 
   //eliminar producto especifico.
-  deleteProducts = async (id) => {
+  deleteProduct = async (pid) => {
     const products = await this.getProducts();
-    const index = products.findIndex((product) => product.id === id);
+    const index = products.findIndex((product) => product.id == pid);
 
     if (index !== -1) {
       products.splice(index, 1);
       await fs.writeFile(this.path, JSON.stringify(products));
+      console.log("Producto eliminado");
+      return "Producto Eliminado"
     } else {
       console.log("Producto no encotrado");
+      return "Producto no encotrado"
     }
   };
 }
