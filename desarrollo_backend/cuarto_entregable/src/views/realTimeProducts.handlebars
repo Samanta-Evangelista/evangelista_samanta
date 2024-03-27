@@ -1,0 +1,45 @@
+<h1>Productos en Tiempo Real</h1>
+<table id="product-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Imágenes</th>
+            <th>Código</th>
+            <th>Cantidad</th>
+            <th>Categoría</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on('productList', products => {
+        const productTableBody = document.querySelector('#product-table tbody');
+        productTableBody.innerHTML = products.map(product => `
+    <tr>
+        <td>${product.id}</td>
+        <td>${product.title}</td>
+        <td>${product.status ? 'Activo' : 'Inactivo'}</td>
+        <td>${product.description}</td>
+        <td>${product.price}</td>
+        <td>
+        ${product.thumbnails.length ?
+                `<img src="${product.thumbnails[0]}" alt="Imagen del producto">` :
+                'Sin imagen'
+            }
+        </td>
+        <td>${product.code}</td>
+        <td>${product.stock}</td>
+        <td>${product.category}</td>
+    </tr>
+    `).join('');
+    });
+</script>

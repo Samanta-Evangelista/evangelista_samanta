@@ -1,0 +1,41 @@
+<body>
+    <h1>Listado de Productos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Imágenes</th>
+                <th>Código</th>
+                <th>Cantidad</th>
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each productList}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.title}}</td>
+                <td>{{#if status}} Activo {{else}} Inactivo {{/if}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.price}}</td>
+                <td>
+                    {{#if this.thumbnails.length}}
+                    <img src="{{this.thumbnails.[0]}}" alt="Imagen del producto">
+                    {{else}}
+                    Sin imagen
+                    {{/if}}
+                </td>
+                <td>{{this.code}}</td>
+                <td>{{this.stock}}</td>
+                <td>{{this.category}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+
+<script src="/socket.io/socket.io.js"></script>

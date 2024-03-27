@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export class ProductManager {
   constructor() {
-    this.path = "products.json";
+    this.path = "./src/data/products.json";
     this.products = [];
   }
 
@@ -11,7 +11,7 @@ export class ProductManager {
     title,
     description,
     price,
-    thumbnail,
+    thumbnails,
     code,
     stock,
     status,
@@ -28,7 +28,7 @@ export class ProductManager {
       title,
       description,
       price,
-      thumbnail,
+      thumbnails,
       code,
       stock,
       status,
@@ -36,6 +36,11 @@ export class ProductManager {
     };
 
     this.products = await this.getProducts();
+
+    if(this.products.find((product) => product.code == code)){
+      throw new Error("El campo 'codigo' ya existe. Por favor, ingrese otro código.");
+    }
+
     this.products.push(newProduct);
 
     await fs.writeFile(this.path, JSON.stringify(this.products));
@@ -66,6 +71,13 @@ export class ProductManager {
   //actualizar un producto especifico
   updateProduct = async (pid, { ...data }) => {
     const response = await this.getProducts();
+
+console.log(data)
+
+    if(response.find((product) => product.code == data.code)){
+      throw new Error("El campo 'codigo' ya existe. Por favor, ingrese otro código.");
+    }
+
     const index = response.findIndex((product) => product.id == pid);
 
     if (index != -1) {

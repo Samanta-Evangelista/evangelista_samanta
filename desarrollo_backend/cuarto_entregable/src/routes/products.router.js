@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { productManager } from "../index.js";
+import { ProductManager } from "../service/productManager.js";
 
 const productsRouter = Router();
+const productManager = new ProductManager();
 
 productsRouter.get('/', async (req, res) => {
     try {
@@ -15,7 +16,7 @@ productsRouter.get('/', async (req, res) => {
         return res.json(products)
     } catch (error) {
         console.log(error);
-        res.send('ERROR AL RECIBIR LOS PRODUCTOS')
+        res.status(404).send('ERROR AL RECIBIR LOS PRODUCTOS')
     }
 
 })
@@ -27,46 +28,48 @@ productsRouter.get('/:pid', async (req, res) => {
         const products = await productManager.getProductsById(pid)
 
         if(!products)
-            return res.send("Producto no encontrado");
+            return res.status(404).send("Producto no encontrado");
 
         res.json(products)
     } catch (error) {
         console.log(error);
-        res.send(`ERROR AL RECIBIR EL PRODUCTO CON ID ${pid}`)
+        res.status(404).send(`ERROR AL RECIBIR EL PRODUCTO CON ID ${pid}`)
     }
 })
 
 productsRouter.post('/', async (req, res) => {
     try {
-        const { title, description, price, thumbnail = [], code, stock, status = true, category } = req.body;
-        const response = await productManager.addProducts({ title, description, price, thumbnail, code, stock, status, category });
+        const { title, description, price, thumbnails = [], code, stock, status = true, category } = req.body;
+        const response = await productManager.addProducts({ title, description, price, thumbnails, code, stock, status, category });
         res.json(response)
     } catch (error) {
         console.log(error);
-        res.send('ERROR AL INTENTAR AGREGAR PRODUCTO: ' + error)
+        res.status(404).send('ERROR AL INTENTAR AGREGAR PRODUCTO: ' + error)
     }
 })
 
 productsRouter.put('/:pid', async (req, res) => {
     const { pid } = req.params;
 
+    console.log(req.body);
+
     try {
         const response = await productManager.updateProduct(pid, req.body)
         res.json(response)
     } catch (error) {
         console.log(error);
-        res.send(`ERROR AL INTENTAR EDITAR PRODUCTO CON ID ${pid}`)
+        res.status(404).send(`ERROR AL INTENTAR EDITAR PRODUCTO CON ID ${pid}: ${error}`)
     }
 })
 
 productsRouter.delete('/:pid', async (req, res) => {
     const { pid } = req.params;
     try {
-       return res.send(await productManager.deleteProduct(pid))
+    return res.send(await productManager.deleteProduct(pid))
 
     } catch (error) {
         console.log(error);
-        res.send(`ERROR AL INTENTAR ELIMINAR PRODUCTO CON ID ${pid}`)
+        res.status(404).send(`ERROR AL INTENTAR ELIMINAR PRODUCTO CON ID ${pid}`)
 
     }
 })

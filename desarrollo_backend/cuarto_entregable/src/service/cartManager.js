@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 export class CartManager {
 
     constructor() {
-        this.path = 'cart.json';
+        this.path = './src/data/cart.json';
         this.carts = [];
     }
 
