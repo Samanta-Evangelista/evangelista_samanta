@@ -102,7 +102,7 @@ console.log(data)
       console.log("Producto eliminado");
       return "Producto Eliminado"
     } else {
-      console.log("Producto no encotrado");
+      console.log("Producto no encotrado: " + pid);
       return "Producto no encotrado"
     }
   };

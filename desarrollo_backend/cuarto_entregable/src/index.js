@@ -33,9 +33,14 @@ const httpServer = app.listen(port, () => {
 const socketServer = new Server(httpServer);
 
 socketServer.on("connection", async (socket) => {
-    console.log("Cliente conectado: ", socket.id);
+    console.log("Nuevo cliente conectado: ", socket.id);
     const productList = await productManager.getProducts();
     socket.emit("productList", productList);
+
+    socket.on("deleteProduct", async (productId) => {
+        console.log("Eliminando en index: " + productId);
+        await productManager.deleteProduct(productId);
+    });
 });
 
 

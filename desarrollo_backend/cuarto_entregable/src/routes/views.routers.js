@@ -26,6 +26,7 @@ viewsRouter.get("/realtimeproducts", async (req, res) => {
         {
             title: "Real Time Products",
             style: "realtimeproducts.css",
+            script: "realtimeproducts.js",
             productList
         }
         );
