@@ -32,16 +32,12 @@ export class productManagerDB {
       console.error(error.message);
       throw new Error("Error al crear el producto");
     }
-
-    await fs.writeFile(this.path, JSON.stringify(this.products));
-
-    return newProduct;
   };
 
   //Obtener todos los productos
   getProducts = async () => {
     try {
-      return await productModel.find();
+      return await productModel.find(); //.lean()
     } catch (error) {
       console.error(error.message);
       throw new Error("Error al buscar los productos");

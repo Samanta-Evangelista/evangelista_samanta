@@ -7,15 +7,17 @@ import { productsRouter } from "./routes/products.router.js";
 import { cartsRouter } from "./routes/cart.routers.js";
 import { viewsRouter } from "./routes/views.routers.js";
 // import { productManagerFS } from "./dao/productManagerFS.js";
+import { productManagerDB } from "./dao/productManagerDB.js";
 
 const app = express();
 // const productManager = new productManagerFS();
+const productManager = new productManagerDB();
 
 //Mongo Atlas
 const conexion = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://coderSE:coderSE@cluster0.lzhohyn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      "mongodb+srv://coderSE:coderSE@cluster0.lzhohyn.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0"
     );
     console.log("conectado a la bbdd remota de mongoDB ATLAS");
   } catch (error) {
