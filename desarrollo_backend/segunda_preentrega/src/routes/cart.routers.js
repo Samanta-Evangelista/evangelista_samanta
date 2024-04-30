@@ -61,7 +61,7 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
   }
 });
 
-// PUT PRODUCTS CART
+// UPDATE PRODUCTS BY CART
 cartsRouter.put("/:cid", async (req, res) => {
   const cartId = req.params.cid;
 
@@ -79,6 +79,35 @@ cartsRouter.put("/:cid", async (req, res) => {
     return res
       .status(200)
       .send({ message: "Carrito actualizado correctamente", result: result });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// UPDATE QUANTITY PRODUCT BY CART
+cartsRouter.put("/:cid/product/:pid", async (req, res) => {
+  const cartId = req.params.cid;
+  const productId = req.params.pid;
+
+  const { quantity } = req.body;
+
+  try {
+    const result = await cartManager.updateProductQuantity(
+      cartId,
+      productId,
+      quantity
+    );
+
+    if (!result) {
+      return res.status(400).send({
+        message:
+          "Hubo un error al actualizar el producto. Asegurate de que los ID correspondan a un carrito y producto existentes",
+      });
+    }
+
+    return res
+      .status(200)
+      .send({ message: "Se ha actualizado el carrito correctamente" });
   } catch (error) {
     console.error(error.message);
   }

@@ -108,4 +108,36 @@ export class cartManagerBD {
       console.error(error.message);
     }
   };
+
+  async updateProductQuantity(cartId, productId, quantity) {
+    try {
+      const validateCart = await cartModel.findOne({ _id: cartId });
+
+      if (!validateCart) {
+        console.log("carrito inexistente");
+        return;
+      }
+
+      const productInCart = validateCart.products.find(
+        (prod) => prod.product == productId
+      );
+
+      if (!productInCart) {
+        return;
+      }
+
+      const result = await cartModel.updateOne(
+        { _id: cartId, "products.product": productId },
+        { $set: { "products.$.quantity": quantity } }
+      );
+
+      if (!result) {
+        return;
+      }
+
+      return result;
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 }
