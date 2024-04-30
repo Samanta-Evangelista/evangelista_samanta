@@ -113,4 +113,26 @@ cartsRouter.put("/:cid/product/:pid", async (req, res) => {
   }
 });
 
+// DELETE ALL PRODUCTS BY CART
+cartsRouter.delete("/:cid", async (req, res) => {
+  const cartId = req.params.cid;
+
+  try {
+    const result = await cartManager.deleteAllProductsFromCart(cartId);
+
+    if (!result) {
+      return res.status(400).send({
+        message:
+          "Hubo un error al intentar eliminar todos los productos del carrito. Asegurese de que ese ID corresponda a un carrito",
+      });
+    }
+
+    return res
+      .status(200)
+      .send({ message: "Todos los productos han sido eliminados del carrito" });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 export { cartsRouter };

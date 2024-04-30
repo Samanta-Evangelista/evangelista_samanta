@@ -109,7 +109,7 @@ export class cartManagerBD {
     }
   };
 
-  async updateProductQuantity(cartId, productId, quantity) {
+  updateProductQuantity = async (cartId, productId, quantity) => {
     try {
       const validateCart = await cartModel.findOne({ _id: cartId });
 
@@ -139,5 +139,24 @@ export class cartManagerBD {
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
+
+  deleteAllProductsFromCart = async (cartId) => {
+    try {
+      const validateCart = await cartModel.findOne({ _id: cartId });
+
+      if (!validateCart) {
+        return;
+      }
+
+      const result = await cartModel.updateOne(
+        { _id: cartId },
+        { products: [] }
+      );
+
+      return result;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 }
