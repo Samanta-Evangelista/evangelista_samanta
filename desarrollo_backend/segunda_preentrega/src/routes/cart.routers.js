@@ -40,6 +40,7 @@ cartsRouter.post("/:cid/product/:pid", async (req, res) => {
   }
 });
 
+// DELETE PRODUCT FROM CART
 cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
   const cartId = req.params.cid;
   const productId = req.params.pid;
@@ -55,6 +56,29 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
     }
 
     return res.status(200).send({ message: result });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// PUT PRODUCTS CART
+cartsRouter.put("/:cid", async (req, res) => {
+  const cartId = req.params.cid;
+
+  const products = req.body;
+
+  try {
+    const result = await cartManager.updateCartProducts(cartId, products);
+
+    if (!result) {
+      return res.status(400).send({
+        message: "Hubo un error al actualizar el carrito. Intentelo de nuevo",
+      });
+    }
+
+    return res
+      .status(200)
+      .send({ message: "Carrito actualizado correctamente", result: result });
   } catch (error) {
     console.error(error.message);
   }

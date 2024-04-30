@@ -89,4 +89,23 @@ export class cartManagerBD {
       console.error(error.message);
     }
   };
+
+  updateCartProducts = async (cartId, products) => {
+    try {
+      const validateCart = await cartModel.findOne({ _id: cartId });
+
+      if (!validateCart) {
+        return;
+      }
+
+      const result = cartModel.updateOne(
+        { _id: cartId },
+        { products: products }
+      );
+
+      return result;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 }
