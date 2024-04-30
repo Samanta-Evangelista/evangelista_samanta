@@ -2,7 +2,7 @@
   {
     "id": "d15018b2-4b45-4db8-8e53-0767b71c8e62",
     "title": "Coca-Cola",
-    "description": "descripción gaseosa",
+    "description": "gaseosa",
     "price": 1500,
     "thumbnails": [],
     "code": "0001",
@@ -13,7 +13,7 @@
   {
     "id": "5988cc82-b2db-474b-a8fc-addb3e4391c4",
     "title": "Sprite",
-    "description": "descripción gaseosa",
+    "description": "gaseosa",
     "price": 100,
     "thumbnails": [],
     "code": "0002",
@@ -24,7 +24,7 @@
   {
     "id": "0218732a-11bd-451d-a7fb-aed1cb5d2001",
     "title": "Fanta",
-    "description": "descripción gaseosa",
+    "description": "gaseosa",
     "price": 100,
     "thumbnails": [],
     "code": "0003",
