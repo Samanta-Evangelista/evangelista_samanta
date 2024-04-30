@@ -61,4 +61,32 @@ export class cartManagerBD {
       throw new Error("Error al actualizar el carrito");
     }
   };
+
+  deleteProductFromCart = async (cartId, productId) => {
+    try {
+      const validateProduct = await cartModel.findOne({
+        _id: cartId,
+        "products.product": productId,
+      });
+
+      console.log(validateProduct);
+
+      if (!validateProduct) {
+        return;
+      }
+
+      const result = await cartModel.updateOne(
+        { _id: cartId, "products.product": productId },
+        { $pull: { products: { product: productId } } }
+      );
+
+      if (!result) {
+        return;
+      }
+
+      return result;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 }
