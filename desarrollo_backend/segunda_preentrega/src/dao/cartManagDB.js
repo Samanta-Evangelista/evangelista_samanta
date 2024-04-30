@@ -12,7 +12,9 @@ export class cartManagerBD {
 
   getCartProducts = async (id) => {
     try {
-      const cart = await cartModel.findOne({ _id: id });
+      const cart = await cartModel
+        .findOne({ _id: id })
+        .populate("products.product");
 
       // console.log(JSON.stringify(cart, null, "\t"));
       return cart;
