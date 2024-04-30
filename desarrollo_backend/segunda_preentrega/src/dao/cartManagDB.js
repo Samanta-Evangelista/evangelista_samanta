@@ -12,8 +12,10 @@ export class cartManagerBD {
 
   getCartProducts = async (id) => {
     try {
-      const cart = await cartModel.findOne({ _id: id }); //.lean()
-      return cart.products;
+      const cart = await cartModel.findOne({ _id: id });
+
+      // console.log(JSON.stringify(cart, null, "\t"));
+      return cart;
     } catch (error) {
       console.error(error.message);
       throw new Error(`Error al buscar el carrito ${id}`);
