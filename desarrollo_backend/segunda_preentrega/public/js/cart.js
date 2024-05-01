@@ -37,3 +37,32 @@ const addToCart = async (productId) => {
     console.error("Error adding item to cart:", error);
   }
 };
+
+const deleteProductToCart = async (productId, cartId) => {
+  debugger;
+  try {
+    const response = await fetch(`api/carts/${cartId}/product/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al eliminar el producto del carrito.");
+    } else {
+      Swal.fire({
+        title: "Confirmación",
+        text: "El producto se eliminó del carrito",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
+    }
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+  }
+};

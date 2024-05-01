@@ -32,23 +32,33 @@
           <td>{{this.code}}</td>
           <td>{{this.stock}}</td>
           <td>{{this.category}}</td>
-          <td><button onclick="addToCart('{{this._id}}')">Agregar al carrito</button></td>
+          <td><button class="boton" onclick="addToCart('{{this._id}}')">Agregar
+              al carrito</button></td>
         </tr>
       {{/each}}
-      {{#if productList.prevPage}}
-        <a
-          href="/products?page={{productList.prevPage}}"
-          class="prev"
-        >previous</a>
-      {{/if}}
-      {{#if productList.nextPage}}
-        <a href="/products?page={{productList.nextPage}}" class="next">next</a>
-      {{/if}}
     </tbody>
   </table>
+  <br />
+
+  {{#if productList.prevPage}}
+    <a
+      href="/products?page={{productList.prevPage}}"
+      class="prev boton"
+      style="margin-right: 10px"
+    >previous</a>
+  {{/if}}
+  {{#if productList.nextPage}}
+    <a
+      href="/products?page={{productList.nextPage}}"
+      class="next boton"
+    >next</a>
+  {{/if}}
+  <br />
+  <br />
+  <br />
+  <a href="#" onclick="irAlCarrito(event)" class="boton">Ir al carrito</a>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
-
 <script src="/js/cart.js"></script>

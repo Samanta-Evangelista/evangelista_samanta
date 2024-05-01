@@ -13,7 +13,7 @@ export class cartManagerBD {
   // GET CART (Temporal. Luego manejará carritos por usuario)
   getCart = async () => {
     try {
-      return await cartModel.findOne(); //.lean()
+      return await cartModel.findOne().populate("products.product").lean();
     } catch (error) {
       console.error(error.message);
       throw new Error("Error al buscar carrito");
