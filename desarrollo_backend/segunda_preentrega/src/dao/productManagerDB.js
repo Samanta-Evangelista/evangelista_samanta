@@ -37,13 +37,23 @@ export class productManagerDB {
   //Obtener todos los productos
   getProducts = async (limit, page, query, sort) => {
     try {
-      // return await productModel.find().lean();
-      return await productModel.paginate(query ?? {}, {
+      const aggregateQuery = [{ $sort: { price: sort ?? 1 } }];
+
+      const options = {
         page: page ?? 1,
-        limit: limit ?? 100,
-        sort,
+        limit: limit ?? 10,
         lean: true,
-      });
+      };
+
+      return await productModel.aggregate(aggregateQuery).paginate(options);
+
+      // return await productModel.find().lean();
+      // return await productModel.paginate(query ?? {}, {
+      //   page: page ?? 1,
+      //   limit: limit ?? 100,
+      //   sort,
+      //   lean: true,
+      // });
     } catch (error) {
       console.error(error.message);
       throw new Error("Error al buscar los productos");
