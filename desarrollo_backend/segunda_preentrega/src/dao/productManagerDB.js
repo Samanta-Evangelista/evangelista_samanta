@@ -37,15 +37,23 @@ export class productManagerDB {
   //Obtener todos los productos
   getProducts = async (limit, page, query, sort) => {
     try {
-      // const aggregateQuery = [{ $sort: { price: sort ?? 1 } }];
+      // const aggregateQuery = [];
+
+      // aggregateQuery.push({ $match: query || {} });
+      // aggregateQuery.push({ $sort: { price: sort || 1 } });
+
+      // const products = await productModel.aggregate(aggregateQuery).toArray();
 
       // const options = {
       //   page: page ?? 1,
       //   limit: limit ?? 10,
       //   lean: true,
       // };
+      // const paginatedProducts = await productModel.paginate(products, options);
 
-      // return await productModel.aggregate(aggregateQuery).paginate(options);
+      // return paginatedProducts;
+
+      console.log(sort);
 
       // return await productModel.find().lean();
       return await productModel.paginate(query ?? {}, {
