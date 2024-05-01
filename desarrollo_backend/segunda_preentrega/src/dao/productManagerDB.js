@@ -39,8 +39,8 @@ export class productManagerDB {
     try {
       // const aggregateQuery = [];
 
-      // aggregateQuery.push({ $match: query || {} });
-      // aggregateQuery.push({ $sort: { price: sort || 1 } });
+      // aggregateQuery.push({ $match: query ?? {} });
+      // aggregateQuery.push({ $sort: { price: sort ?? 1 } });
 
       // const products = await productModel.aggregate(aggregateQuery).toArray();
 
@@ -53,9 +53,8 @@ export class productManagerDB {
 
       // return paginatedProducts;
 
-      console.log(sort);
+      // console.log("Control de productManagerDB: " + sort);
 
-      // return await productModel.find().lean();
       return await productModel.paginate(query ?? {}, {
         page: page ?? 1,
         limit: limit ?? 100,

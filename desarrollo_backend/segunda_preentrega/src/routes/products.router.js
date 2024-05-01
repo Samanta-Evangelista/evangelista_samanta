@@ -8,17 +8,40 @@ const productManager = new productManagerDB();
 
 productsRouter.get("/", async (req, res) => {
   try {
-    const { limit } = req.query;
-    const products = await productManager.getProducts();
+    let { limit = 2, page = 1, query = {}, sort = null } = req.query;
+    const products = await productManager.getProducts(limit, page, query, sort);
 
-    if (limit) {
-      const limitedProducts = products.slice(0, limit);
-      return res.json(limitedProducts);
-    }
-    return res.json(products);
+    // console.log("Control de products.router: " + sort);
+
+    // const { limit } = req.query;
+    // const products = await productManager.getProducts();
+
+    // if (limit) {
+    //   const limitedProducts = products.slice(0, limit);
+    //   return res.json(limitedProducts);
+    // }
+
+    res.send({
+      status: "success",
+      payload: products.docs,
+      totalPages: products.totalPages,
+      prevPage: products.prevPage,
+      nextPage: products.nextPage,
+      page: products.page,
+      hasPrevPage: products.hasPrevPage,
+      hasNextPage: products.hasNextPage,
+      prevLink: products.prevPage
+        ? `http://localhost:8080/?page=${products.prevPage}`
+        : null,
+      nextLink: products.nextPage
+        ? `http://localhost:8080/?page=${products.nextPage}`
+        : null,
+    });
+
+    // return res.json(products);
   } catch (error) {
     console.log(error);
-    res.status(404).send("ERROR AL RECIBIR LOS PRODUCTOS");
+    res.status(500).send("ERROR AL RECIBIR LOS PRODUCTOS");
   }
 });
 
@@ -33,7 +56,7 @@ productsRouter.get("/:pid", async (req, res) => {
     res.json(products);
   } catch (error) {
     console.log(error);
-    res.status(404).send(`ERROR AL RECIBIR EL PRODUCTO CON ID ${pid}`);
+    res.status(500).send(`ERROR AL RECIBIR EL PRODUCTO CON ID ${pid}`);
   }
 });
 

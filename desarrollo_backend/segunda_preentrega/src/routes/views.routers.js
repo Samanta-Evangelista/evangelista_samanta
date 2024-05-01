@@ -9,7 +9,7 @@ viewsRouter.get("/", async (req, res) => {
     let { limit = 3, page = 1 } = req.query;
 
     const productList = await productManager.getProducts(limit, page);
-    // console.log(productList);
+    // console.log(productList.nextPage);
 
     res.render("home", {
       title: "Home",
