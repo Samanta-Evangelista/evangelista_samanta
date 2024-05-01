@@ -1,0 +1,37 @@
+<body>
+  <h1>Carrito de compras</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Cantidad</th>
+        <th>Código</th>
+        <th>Producto</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+        <tr>
+          <td>{{this.quantity}}</td>
+          <td>{{this.product.code}}</td>
+          <td>{{this.product.title}}</td>
+          <td>{{this.product.description}}</td>
+          <td>{{this.product.category}}</td>
+          <td>{{this.product.price}}</td>
+          <td><button class="boton"
+              onclick="deleteProductToCart('{{this.product._id}}', '{{../cartId}}')"
+            >Eliminar producto</button></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br />
+  <a href="#" onclick="irAProducts(event)" class="boton">Agregar productos</a>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/cart.js"></script>
