@@ -35,9 +35,15 @@ export class productManagerDB {
   };
 
   //Obtener todos los productos
-  getProducts = async () => {
+  getProducts = async (limit, page, query, sort) => {
     try {
-      return await productModel.find(); //.lean()
+      // return await productModel.find().lean();
+      return await productModel.paginate(query ?? {}, {
+        page: page ?? 1,
+        limit: limit ?? 100,
+        sort,
+        lean: true,
+      });
     } catch (error) {
       console.error(error.message);
       throw new Error("Error al buscar los productos");
