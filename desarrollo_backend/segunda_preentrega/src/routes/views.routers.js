@@ -21,6 +21,23 @@ viewsRouter.get("/", async (req, res) => {
   }
 });
 
+viewsRouter.get("/products", async (req, res) => {
+  try {
+    let { limit = 3, page = 1 } = req.query;
+
+    const productList = await productManager.getProducts(limit, page);
+    // console.log(productList.nextPage);
+
+    res.render("products", {
+      title: "products",
+      style: "home.css",
+      productList,
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 viewsRouter.get("/realtimeproducts", async (req, res) => {
   try {
     const productList = await productManager.getProducts();
