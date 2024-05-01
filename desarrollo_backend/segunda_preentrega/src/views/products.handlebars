@@ -32,6 +32,7 @@
           <td>{{this.code}}</td>
           <td>{{this.stock}}</td>
           <td>{{this.category}}</td>
+          <td><button onclick="addToCart('{{this._id}}')">Agregar al carrito</button></td>
         </tr>
       {{/each}}
       {{#if productList.prevPage}}
@@ -49,3 +50,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
+
+<script src="/js/cart.js"></script>

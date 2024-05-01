@@ -10,6 +10,16 @@ export class cartManagerBD {
     }
   };
 
+  // GET CART (Temporal. Luego manejará carritos por usuario)
+  getCart = async () => {
+    try {
+      return await cartModel.findOne(); //.lean()
+    } catch (error) {
+      console.error(error.message);
+      throw new Error("Error al buscar carrito");
+    }
+  };
+
   getCartProducts = async (id) => {
     try {
       const cart = await cartModel

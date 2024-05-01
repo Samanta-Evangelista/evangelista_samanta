@@ -18,6 +18,19 @@ cartsRouter.post("/", async (req, res) => {
   }
 });
 
+// GET CART (Temporal. Luego manejará carritos por usuario)
+cartsRouter.get("/", async (req, res) => {
+  try {
+    const carrito = await cartManager.getCart();
+
+    if (!carrito) carrito = await cartManager.newCart();
+
+    res.json(carrito);
+  } catch (error) {
+    res.status(404).send("Error al crear carrito");
+  }
+});
+
 // GET PRODUCTS CART BY ID
 cartsRouter.get(`/:cid/Products`, async (req, res) => {
   const { cid } = req.params;
