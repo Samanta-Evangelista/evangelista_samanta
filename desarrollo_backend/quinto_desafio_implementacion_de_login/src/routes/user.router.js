@@ -3,25 +3,41 @@ import userModel from "../dao/models/userModel.js";
 
 const userRouter = Router();
 
-// userRouter.post("/register", async (req, res) => {
-//   try {
-//     const user = req.body;
-//     await userModel.create(user);
-
-//     delete user.password;
-//     req.session.user = user;
-//   } catch (e) {
-//     res.redirect("/register");
-//   }
-// });
-
 userRouter.post("/register", async (req, res) => {
   try {
     req.session.failRegister = false;
-    await userModel.create(req.body);
+
+    const { first_name, last_name, email, age, password } = req.body;
+
+    if (!first_name || !last_name || !email || !age || !password) {
+      res.status(500).send("CAMPOS INCOMPLETOS");
+    }
+
+    let rolUsuario = "usuario";
+    if (email === "adminCoder@coder.com") {
+      if (password === "adminCod3r123") {
+        rolUsuario = "admin";
+      } else {
+        console.log(
+          "El usuario es reservado. Proporcione la contraseña correcta."
+        );
+        return;
+      }
+    }
+
+    await userModel.create({
+      first_name,
+      last_name,
+      email,
+      age,
+      password,
+      rol: rolUsuario,
+    });
+
     res.redirect("/login");
   } catch (e) {
     req.session.failRegister = true;
+
     res.redirect("/register");
   }
 });

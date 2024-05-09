@@ -24,6 +24,10 @@ const usersSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  rol: {
+    type: String,
+    require: true,
+  },
 });
 
 const userModel = mongoose.model(usersCollection, usersSchema);
