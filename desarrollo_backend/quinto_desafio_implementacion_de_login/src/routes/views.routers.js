@@ -16,13 +16,14 @@ viewsRouter.get("/products", auth, async (req, res) => {
     let { limit = 3, page = 1 } = req.query;
 
     const productList = await productManager.getProducts(limit, page);
-    // console.log(productList.nextPage);
+    // console.log(req.session);
 
     res.render("products", {
       title: "products",
       style: "home.css",
       productList,
       user: req.session.user,
+      isAdmin: req.session.user.rol === "admin",
     });
   } catch (error) {
     res.status(500).send(error);

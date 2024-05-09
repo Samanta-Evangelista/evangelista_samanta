@@ -1,6 +1,13 @@
 <body>
+  <a href="/api/session/logout" class="logout-button">Logout</a>
+
   <h1>Listado de Productos</h1>
-  <h2>Bienvenido/a: <b>{{user.first_name}}, {{user.last_name}}</b></h2>  
+  <h2>Bienvenido/a:
+    <b>{{user.first_name}}, {{user.last_name}}</b>
+    {{#if isAdmin}}
+      <b>(ADMINISTRADOR)</b>
+    {{/if}}
+  </h2>
   <h3>Elija sus productos a comprar:</h3>
   <table>
     <thead>

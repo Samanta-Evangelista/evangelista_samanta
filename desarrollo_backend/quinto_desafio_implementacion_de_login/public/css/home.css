@@ -27,7 +27,7 @@ label {
 }
 
 button {
-  background-color: #f06;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px;
@@ -36,7 +36,7 @@ button {
 }
 
 button:hover {
-  background-color: #d05;
+  background-color: #0056b3;
 }
 
 @media (max-width: 768px) {
@@ -54,4 +54,25 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #0056b3;
 }
