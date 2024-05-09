@@ -22,6 +22,7 @@ viewsRouter.get("/products", auth, async (req, res) => {
       title: "products",
       style: "home.css",
       productList,
+      user: req.session.user,
     });
   } catch (error) {
     res.status(500).send(error);

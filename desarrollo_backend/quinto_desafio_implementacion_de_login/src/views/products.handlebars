@@ -1,5 +1,7 @@
 <body>
   <h1>Listado de Productos</h1>
+  <h2>Bienvenido/a: <b>{{user.first_name}}, {{user.last_name}}</b></h2>  
+  <h3>Elija sus productos a comprar:</h3>
   <table>
     <thead>
       <tr>
@@ -45,13 +47,13 @@
       href="/products?page={{productList.prevPage}}"
       class="prev boton"
       style="margin-right: 10px"
-    >previous</a>
+    >Atrás</a>
   {{/if}}
   {{#if productList.nextPage}}
     <a
       href="/products?page={{productList.nextPage}}"
       class="next boton"
-    >next</a>
+    >Siguiente</a>
   {{/if}}
   <br />
   <br />
