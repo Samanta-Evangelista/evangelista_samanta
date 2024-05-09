@@ -65,7 +65,7 @@ button:hover {
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #d32626;
   color: #ffffff;
   text-decoration: none;
   border: none;
@@ -74,5 +74,58 @@ button:hover {
 }
 
 .logout-button:hover {
-  background-color: #0056b3;
+  background-color: #fd0303;
+}
+
+.go-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #0d422a;
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-button:hover {
+  background-color: #0e633d;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%; /* La tabla ocupa el 100% del ancho disponible */
+  border-collapse: collapse; /* Combinar bordes de celdas */
+}
+
+/* Estilos para las celdas de encabezado */
+th {
+  background-color: #0a0a0a; /* Color de fondo */
+  border: 1px solid #dddddd; /* Borde */
+  padding: 8px; /* Espaciado interno */
+  text-align: left; /* Alineación del texto */
+}
+
+/* Estilos para las celdas de datos */
+td {
+  border: 1px solid #dddddd; /* Borde */
+  padding: 8px; /* Espaciado interno */
+  text-align: left; /* Alineación del texto */
+}
+
+/* Estilos para filas alternas */
+tr:nth-child(even) {
+  background-color: #410606; /* Color de fondo para filas pares */
+}
+
+a {
+  color: #007bff; /* Color del texto */
+  text-decoration: none; /* Eliminar subrayado predeterminado */
+}
+
+/* Estilo al pasar el mouse sobre el enlace */
+a:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
 }
