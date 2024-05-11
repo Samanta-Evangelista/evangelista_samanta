@@ -1,0 +1,25 @@
+<body>
+  <h1>Loguearse</h1>
+  <hr />
+
+  <form method="post" action="/api/session/login">
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" />
+
+    <label for="password">Contraseña</label>
+    <input type="password" name="password" id="password" />
+
+    <button class="boton" type="submit">Loguearse</button>
+    <br />
+
+    <span><a href="/register" target="_self">Registrarse</a></span>
+
+  </form>
+</body>
+
+{{#if failLogin}}
+  <script type="text/javascript">
+    alert("Hubo un error al loguearse!");
+  </script>
+{{/if}}

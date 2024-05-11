@@ -1,5 +1,13 @@
 <body>
+  <a href="/api/session/logout" class="logout-button">Logout</a>
+
   <h1>Listado de Productos</h1>
+  <h2>Bienvenido/a:
+    <b>{{user.first_name}}, {{user.last_name}}</b>
+    {{#if isAdmin}}
+      <b>(ADMINISTRADOR)</b>
+    {{/if}}
+  </h2>
   <table>
     <thead>
       <tr>
@@ -12,6 +20,7 @@
         <th>Código</th>
         <th>Cantidad</th>
         <th>Categoría</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -45,18 +54,18 @@
       href="/products?page={{productList.prevPage}}"
       class="prev boton"
       style="margin-right: 10px"
-    >previous</a>
+    >Atrás</a>
   {{/if}}
   {{#if productList.nextPage}}
     <a
       href="/products?page={{productList.nextPage}}"
       class="next boton"
-    >next</a>
+    >Siguiente</a>
   {{/if}}
   <br />
   <br />
   <br />
-  <a href="#" onclick="irAlCarrito(event)" class="boton">Ir al carrito</a>
+  <a href="/cart" class="go-button">Ir al carrito</a>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
