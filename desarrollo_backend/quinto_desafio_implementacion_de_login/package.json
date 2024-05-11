@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "segunda_preentrega",
+  "name": "sexto_desafio",
   "version": "1.0.0",
-  "description": "",
+  "description": "Implementacion_de_login",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js",
