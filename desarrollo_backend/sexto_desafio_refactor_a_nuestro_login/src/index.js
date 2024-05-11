@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import handlebars from "express-handlebars";
 import { Server } from "socket.io";
-import __dirname from "./utils/constantUtils.js";
+import __dirname from "./utils/constants.js";
 import { productsRouter } from "./routes/products.router.js";
 import { cartsRouter } from "./routes/cart.routers.js";
 import { userRouter } from "./routes/user.router.js";

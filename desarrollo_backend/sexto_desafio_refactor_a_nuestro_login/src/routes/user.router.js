@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userModel from "../dao/models/userModel.js";
+import { createHash, isValidPassword } from "../utils/crypt.js";
 
 const userRouter = Router();
 
@@ -30,7 +31,7 @@ userRouter.post("/register", async (req, res) => {
       last_name,
       email,
       age,
-      password,
+      password: createHash(password),
       rol: rolUsuario,
     });
 
@@ -45,13 +46,13 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
   try {
     req.session.failLogin = false;
-    const result = await userModel.findOne({ email: req.body.email });
+    const result = await userModel.findOne({ email: req.body.email }).lean();
     if (!result) {
       req.session.failLogin = true;
       return res.redirect("/login");
     }
 
-    if (req.body.password !== result.password) {
+    if (!isValidPassword(result, req.body.password)) {
       req.session.failLogin = true;
       return res.redirect("/login");
     }
