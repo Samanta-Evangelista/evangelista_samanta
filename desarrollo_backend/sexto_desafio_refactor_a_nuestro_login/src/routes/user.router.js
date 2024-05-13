@@ -1,68 +1,51 @@
 import { Router } from "express";
 import userModel from "../dao/models/userModel.js";
 import { createHash, isValidPassword } from "../utils/crypt.js";
+import passport from "passport";
 
 const userRouter = Router();
 
-userRouter.post("/register", async (req, res) => {
-  try {
-    req.session.failRegister = false;
-
-    const { first_name, last_name, email, age, password } = req.body;
-
-    if (!first_name || !last_name || !email || !age || !password) {
-      res.status(500).send("CAMPOS INCOMPLETOS");
-    }
-
-    let rolUsuario = "usuario";
-    if (email === "adminCoder@coder.com") {
-      if (password === "adminCod3r123") {
-        rolUsuario = "admin";
-      } else {
-        console.log(
-          "El usuario es reservado. Proporcione la contraseña correcta."
-        );
-        return;
-      }
-    }
-
-    await userModel.create({
-      first_name,
-      last_name,
-      email,
-      age,
-      password: createHash(password),
-      rol: rolUsuario,
-    });
-
+userRouter.post(
+  "/register",
+  passport.authenticate("register", {
+    failureRedirect: "/api/session/failRegister",
+  }),
+  async (req, res) => {
     res.redirect("/login");
-  } catch (e) {
-    req.session.failRegister = true;
-
-    res.redirect("/register");
   }
+);
+
+userRouter.get("/failRegister", async (req, res) => {
+  console.log("Fallo en la estrategia");
+  // res.status(400).send({ status: "error", message: "Registro fallido" });
+  res.redirect("/register");
 });
 
-userRouter.post("/login", async (req, res) => {
-  try {
-    req.session.failLogin = false;
-    const result = await userModel.findOne({ email: req.body.email }).lean();
-    if (!result) {
-      req.session.failLogin = true;
-      return res.redirect("/login");
+userRouter.post(
+  "/login",
+  passport.authenticate("login", { failureRedirect: "/api/session/faillogin" }),
+  async (req, res) => {
+    if (!req.user) {
+      return res
+        .status(400)
+        .send({ status: "error", error: "Credenciales inválidas" });
     }
 
-    if (!isValidPassword(result, req.body.password)) {
-      req.session.failLogin = true;
-      return res.redirect("/login");
-    }
+    req.session.user = {
+      first_name: req.user.first_name,
+      last_name: req.user.last_name,
+      age: req.user.age,
+      email: req.user.email,
+      rol: req.user.rol,
+    };
 
-    delete result.password;
-    req.session.user = result;
-    return res.redirect("/");
-  } catch (e) {
-    return res.redirect("/login");
+    res.redirect("/");
   }
+);
+
+userRouter.get("/failLogin", async (req, res) => {
+  // res.status(400).send({ status: "error", message: "Loguin fallido" });
+  res.redirect("/login");
 });
 
 userRouter.get("/logout", (req, res) => {

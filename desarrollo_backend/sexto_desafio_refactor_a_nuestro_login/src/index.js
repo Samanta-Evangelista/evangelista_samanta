@@ -10,6 +10,8 @@ import { viewsRouter } from "./routes/views.routers.js";
 import { productManagerDB } from "./dao/productManagerDB.js";
 import mongoStore from "connect-mongo";
 import session from "express-session";
+import passport from "passport";
+import initializatePassport from "./config/passport.config.js";
 
 const app = express();
 const productManager = new productManagerDB();
@@ -51,6 +53,10 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+initializatePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routers
 app.use("/", viewsRouter);
