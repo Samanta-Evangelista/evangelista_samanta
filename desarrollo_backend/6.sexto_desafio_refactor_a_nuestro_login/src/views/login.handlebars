@@ -12,14 +12,15 @@
 
     <button class="boton" type="submit">Loguearse</button>
     <br />
-
     <span><a href="/register" target="_self">Registrarse</a></span>
 
   </form>
-</body>
+  <div class="container">
+    <div class="centered">
+      <span>
+        <a href="/api/session/github" target="_self"><button>Entrar con GitHub</button></a>
+      </span>
+    </div>
+  </div>
 
-{{#if failLogin}}
-  <script type="text/javascript">
-    alert("Hubo un error al loguearse!");
-  </script>
-{{/if}}
+</body>
