@@ -1,0 +1,73 @@
+<body>
+  <a href="/api/session/logout" class="logout-button">Logout</a>
+
+  <h1>Listado de Productos</h1>
+  <h2>Bienvenido/a:
+    <b>{{user.first_name}}, {{user.last_name}}</b>
+    {{#if isAdmin}}
+      <b>(ADMINISTRADOR)</b>
+    {{/if}}
+  </h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Imágenes</th>
+        <th>Código</th>
+        <th>Cantidad</th>
+        <th>Categoría</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each productList.docs}}
+        <tr>
+          <td>{{this._id}}</td>
+          <td>{{this.title}}</td>
+          <td>{{#if status}} Activo {{else}} Inactivo {{/if}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.price}}</td>
+          <td>
+            {{#if this.thumbnails.length}}
+              <img src="{{this.thumbnails.[0]}}" alt="Imagen del producto" />
+            {{else}}
+              Sin imagen
+            {{/if}}
+          </td>
+          <td>{{this.code}}</td>
+          <td>{{this.stock}}</td>
+          <td>{{this.category}}</td>
+          <td><button class="boton" onclick="addToCart('{{this._id}}')">Agregar
+              al carrito</button></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br />
+
+  {{#if productList.prevPage}}
+    <a
+      href="/products?page={{productList.prevPage}}"
+      class="prev boton"
+      style="margin-right: 10px"
+    >Atrás</a>
+  {{/if}}
+  {{#if productList.nextPage}}
+    <a
+      href="/products?page={{productList.nextPage}}"
+      class="next boton"
+    >Siguiente</a>
+  {{/if}}
+  <br />
+  <br />
+  <br />
+  <a href="/cart" class="go-button">Ir al carrito</a>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/cart.js"></script>
