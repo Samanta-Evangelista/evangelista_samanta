@@ -1,0 +1,90 @@
+[
+  {
+    "id": "d15018b2-4b45-4db8-8e53-0767b71c8e62",
+    "title": "Coca-Cola",
+    "description": "gaseosa",
+    "price": 1500,
+    "thumbnails": [],
+    "code": "0001",
+    "stock": 200,
+    "status": true,
+    "category": "Bebida"
+  },
+  {
+    "id": "5988cc82-b2db-474b-a8fc-addb3e4391c4",
+    "title": "Sprite",
+    "description": "gaseosa",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0002",
+    "stock": 200,
+    "status": true,
+    "category": "Bebida"
+  },
+  {
+    "id": "0218732a-11bd-451d-a7fb-aed1cb5d2001",
+    "title": "Fanta",
+    "description": "gaseosa",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0003",
+    "stock": 200,
+    "status": true,
+    "category": "Bebida"
+  },
+  {
+    "id": "94d6abe9-20cd-4d3b-816f-66f1dc6f9140",
+    "title": "lays",
+    "description": "Papas Fritas",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0004",
+    "stock": 200,
+    "status": true,
+    "category": "Snack"
+  },
+  {
+    "id": "974b2bbe-a4bb-4f94-a23a-8b572578d9ce",
+    "title": "Pringles",
+    "description": "Papas Fritas",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0005",
+    "stock": 200,
+    "status": true,
+    "category": "Snack"
+  },
+  {
+    "id": "ac8a8b22-3b7d-4551-a9c2-35571facd757",
+    "title": "Pringles",
+    "description": "Papas Fritas",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0006",
+    "stock": 200,
+    "status": true,
+    "category": "Snack"
+  },
+  {
+    "id": "942a4505-4150-45d0-9ba9-62cc1a303844",
+    "title": "Pringles",
+    "description": "Papas Fritas",
+    "price": 100,
+    "thumbnails": [],
+    "code": "0007",
+    "stock": 200,
+    "status": true,
+    "category": "Snack"
+  },
+  {
+    "id": "f281814a-71fb-4f6b-9d55-401af704cf4a",
+    "title": "Palitos",
+    "description": "Palitos salados",
+    "price": 1500,
+    "thumbnails": [],
+    "code": "0008",
+    "stock": 250,
+    "status": true,
+    "category": "Snack"
+  }
+]
